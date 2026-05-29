@@ -7,9 +7,7 @@ import {
   FaUsers,
 } from "react-icons/fa6";
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 
-/** Generates a consistent accent color from the company name initial */
 const LOGO_COLORS = [
   "bg-blue-100 text-blue-700",
   "bg-purple-100 text-purple-700",
@@ -25,9 +23,7 @@ function getLogoColor(name = "") {
   return LOGO_COLORS[index];
 }
 
-// ── Sub-components ────────────────────────────────────────────────────────────
 
-/** Small meta item with an icon */
 function MetaItem({ icon: Icon, text }) {
   if (!text) return null;
   return (
@@ -38,7 +34,6 @@ function MetaItem({ icon: Icon, text }) {
   );
 }
 
-/** Badge pill for work mode / level tags */
 function Badge({ label, variant = "default" }) {
   const styles = {
     default: "bg-gray-100 text-gray-600",
@@ -55,7 +50,6 @@ function Badge({ label, variant = "default" }) {
   );
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
 
 export default function InternshipCard({ internship, onViewDetails }) {
   const logoColor = getLogoColor(internship.companyName);
@@ -63,9 +57,9 @@ export default function InternshipCard({ internship, onViewDetails }) {
 
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-      {/* ── Top row: logo + title + save ── */}
+
       <div className="mb-3 flex items-start gap-3">
-        {/* Company logo placeholder */}
+
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold ${logoColor}`}
           aria-hidden="true"
@@ -88,7 +82,6 @@ export default function InternshipCard({ internship, onViewDetails }) {
           </p>
         </div>
 
-        {/* Save / heart button */}
         <button
           type="button"
           aria-label="Save internship"
@@ -98,7 +91,6 @@ export default function InternshipCard({ internship, onViewDetails }) {
         </button>
       </div>
 
-      {/* ── Badge row: work mode + experience level ── */}
       <div className="mb-3 flex flex-wrap gap-1.5">
         {internship.workFromHome ? (
           <Badge label="Remote" variant="green" />
@@ -113,7 +105,6 @@ export default function InternshipCard({ internship, onViewDetails }) {
         )}
       </div>
 
-      {/* ── Meta grid: location / duration / stipend / posted ── */}
       <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
         <MetaItem
           icon={FaLocationDot}
@@ -125,25 +116,6 @@ export default function InternshipCard({ internship, onViewDetails }) {
           {internship.postedLabel ?? "Recently posted"}
         </span>
       </div>
-
-      {/* ── Skill tags ── */}
-      {internship.skills?.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {internship.skills.slice(0, 5).map((skill) => (
-            <span
-              key={`${internship.id}-${skill}`}
-              className="rounded-md bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600"
-            >
-              {skill}
-            </span>
-          ))}
-          {internship.skills.length > 5 && (
-            <span className="text-[11px] text-gray-400">
-              +{internship.skills.length - 5} more
-            </span>
-          )}
-        </div>
-      )}
 
       {/* ── Footer: deadline + CTA ── */}
       <div className="mt-auto flex items-center justify-between border-t border-gray-50 pt-3">

@@ -26,6 +26,22 @@ function isRecent(postedOnDateTime) {
   return days <= RECENT_DAYS_LIMIT;
 }
 
+function parseDaysAgo(label) {
+  if (!label) return 9999;
+  const lower = String(label).toLowerCase().trim();
+  if (lower === "today" || lower === "just now" || lower.includes("hour")) {
+    return 0;
+  }
+  if (lower === "yesterday") {
+    return 1;
+  }
+  const match = lower.match(/(\d+)\s+day/);
+  if (match) {
+    return parseInt(match[1], 10);
+  }
+  return 9999;
+}
+
 export function normalizeInternships(payload) {
   const meta = payload?.internships_meta || {};
   return Object.values(meta).map((item) => ({
@@ -38,12 +54,13 @@ export function normalizeInternships(payload) {
     durationMonths: monthsFromDuration(item.duration),
     stipendLabel: item.stipend?.salary || "Not disclosed",
     stipendAmount: stipendValue(item.stipend),
-    skills: item.skill_names || [],
     workFromHome: Boolean(item.work_from_home),
     activeHiring: Boolean(item.is_active),
     applicantCount: item.applicant_count ?? null,
     partTime: Boolean(item.part_time),
     recentlyPosted: isRecent(item.postedOnDateTime),
+    postedOnDateTime: item.postedOnDateTime || null,
+    daysAgo: parseDaysAgo(item.posted_by_label),
     postedLabel: item.posted_by_label || item.posted_on || "",
     deadline: item.application_deadline || "Not specified",
     slug: item.url || "",
@@ -60,7 +77,6 @@ export function normalizeFilters(filters) {
     location: normalizedText(filters.location),
     minDuration: toNumberOrNull(filters.minDuration),
     minStipend: toNumberOrNull(filters.minStipend),
-    skills: normalizedText(filters.skills),
     workFromHome: Boolean(filters.workFromHome),
     activeHiring: Boolean(filters.activeHiring),
     recentlyPosted: Boolean(filters.recentlyPosted),
@@ -89,23 +105,26 @@ export function applyFiltersAndSorting(list, filters, search, sortBy) {
       return false;
     }
 
-    if (safeFilters.skills && !item.skills.some((skill) => matchesText(skill, safeFilters.skills))) {
-      return false;
-    }
-
     if (safeFilters.workFromHome && !item.workFromHome) return false;
     if (safeFilters.activeHiring && !item.activeHiring) return false;
     if (safeFilters.recentlyPosted && !item.recentlyPosted) return false;
 
     if (!searchValue) return true;
 
-    const targets = [item.title, item.companyName, ...item.skills];
+    const targets = [item.title, item.companyName];
     return targets.some((text) => normalizedText(text).toLowerCase().includes(searchValue));
   });
 
   const sorted = [...filtered];
   if (sortBy === "latest") {
-    sorted.sort((a, b) => (b.recentlyPosted === a.recentlyPosted ? 0 : b.recentlyPosted ? 1 : -1));
+    sorted.sort((a, b) => {
+      const daysA = a.daysAgo ?? 9999;
+      const daysB = b.daysAgo ?? 9999;
+      if (daysA !== daysB) {
+        return daysA - daysB;
+      }
+      return (b.postedOnDateTime || 0) - (a.postedOnDateTime || 0);
+    });
   } else if (sortBy === "stipend_desc") {
     sorted.sort((a, b) => b.stipendAmount - a.stipendAmount);
   }

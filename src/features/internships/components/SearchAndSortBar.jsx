@@ -17,7 +17,7 @@ export default function SearchAndSortBar({
           <input
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by title, company, skill..."
+            placeholder="Search by title, company..."
             className="w-full rounded-full border border-slate-200 py-2 pl-9 pr-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           />
         </div>

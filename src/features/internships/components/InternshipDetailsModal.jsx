@@ -145,26 +145,7 @@ export default function InternshipDetailsModal({ internship, onClose }) {
             )}
           </div>
 
-          {/* Skills */}
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
-              Skills required
-            </p>
-            {internship.skills?.length ? (
-              <div className="flex flex-wrap gap-2">
-                {internship.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-lg bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-gray-400">Not specified</p>
-            )}
-          </div>
+
 
           {/* Posted label */}
           {internship.postedLabel && (

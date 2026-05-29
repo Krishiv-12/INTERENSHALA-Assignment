@@ -9,13 +9,8 @@ function formatChipValue(key, value) {
   return value;
 }
 
-/**
- * SelectedFilterChips
- * Renders a row of dismissible pills for every active filter.
- * Returns null when no filters are active (keeps DOM clean).
- */
 export default function SelectedFilterChips({ filters, onClearSingle, onClearAll }) {
-  // Collect only filters that have a non-empty / truthy value
+
   const activeChips = Object.entries(filters).filter(([, value]) =>
     typeof value === "boolean" ? value : value !== "" && value !== null
   );

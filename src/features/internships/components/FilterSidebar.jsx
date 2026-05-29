@@ -1,9 +1,6 @@
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { DURATION_FILTER_CONFIG, STIPEND_FILTER_CONFIG } from "../constants";
 
-// ── Sub-components ────────────────────────────────────────────────────────────
-
-/** Renders a labeled form field with consistent spacing */
 function FilterField({ label, children }) {
   return (
     <div className="space-y-1.5">
@@ -15,7 +12,6 @@ function FilterField({ label, children }) {
   );
 }
 
-/** Shared text/number input style */
 function FilterInput(props) {
   return (
     <input
@@ -25,7 +21,6 @@ function FilterInput(props) {
   );
 }
 
-/** iOS-style toggle row */
 function ToggleRow({ label, checked, onClick }) {
   return (
     <button
@@ -43,12 +38,10 @@ function ToggleRow({ label, checked, onClick }) {
   );
 }
 
-/** Thin section divider */
 function Divider() {
   return <hr className="border-gray-100" />;
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
 
 export default function FilterSidebar({ filters, onChange, onReset }) {
   const stipendMinValue = filters.minStipend ?? STIPEND_FILTER_CONFIG.min;
@@ -132,17 +125,6 @@ export default function FilterSidebar({ filters, onChange, onReset }) {
           value={durationValue}
           onChange={handleNullableNumber("minDuration")}
           placeholder="e.g. 2"
-        />
-      </FilterField>
-
-      <Divider />
-
-      {/* Skills */}
-      <FilterField label="Skills">
-        <FilterInput
-          value={filters.skills}
-          onChange={handleTextFilter("skills")}
-          placeholder="e.g. React, Python, Figma"
         />
       </FilterField>
 

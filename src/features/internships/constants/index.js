@@ -3,7 +3,6 @@ export const DEFAULT_FILTERS = {
   location: "",
   minDuration: null,
   minStipend: null,
-  skills: "",
   workFromHome: false,
   activeHiring: false,
   recentlyPosted: false,
@@ -15,7 +14,7 @@ export const SORT_OPTIONS = [
   { label: "Stipend (High to Low)", value: "stipend_desc" },
 ];
 
-export const RECENT_DAYS_LIMIT = 7;
+export const RECENT_DAYS_LIMIT = 2;
 
 export const STIPEND_FILTER_CONFIG = {
   min: 0,
@@ -33,7 +32,6 @@ export const FILTER_LABELS = {
   location: "Location",
   minDuration: "Min duration",
   minStipend: "Min stipend",
-  skills: "Skill",
   workFromHome: "Work from home",
   activeHiring: "Actively hiring",
   recentlyPosted: "Recently posted",

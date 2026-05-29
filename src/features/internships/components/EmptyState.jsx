@@ -3,7 +3,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 export default function EmptyState({ onClear }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-white px-8 py-16 text-center">
-      {/* Illustrative icon circle */}
+
       <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
         <FaMagnifyingGlass className="text-xl text-gray-400" />
       </div>
