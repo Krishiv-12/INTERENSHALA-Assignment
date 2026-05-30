@@ -117,16 +117,28 @@ export default function FilterSidebar({ filters, onChange, onReset }) {
       </FilterField>
 
       {/* Duration */}
-      <FilterField label="Minimum duration (months)">
-        <FilterInput
-          type="number"
-          min={DURATION_FILTER_CONFIG.min}
-          max={DURATION_FILTER_CONFIG.max}
-          value={durationValue}
-          onChange={handleNullableNumber("minDuration")}
-          placeholder="e.g. 2"
-        />
-      </FilterField>
+      <div className="grid grid-cols-2 gap-3">
+        <FilterField label="Min duration (months)">
+          <FilterInput
+            type="number"
+            min={DURATION_FILTER_CONFIG.min}
+            max={DURATION_FILTER_CONFIG.max}
+            value={durationValue}
+            onChange={handleNullableNumber("minDuration")}
+            placeholder="e.g. 2"
+          />
+        </FilterField>
+        <FilterField label="Max duration (months)">
+          <FilterInput
+            type="number"
+            min={DURATION_FILTER_CONFIG.min}
+            max={DURATION_FILTER_CONFIG.max}
+            value={filters.maxDuration ?? ""}
+            onChange={handleNullableNumber("maxDuration")}
+            placeholder="e.g. 6"
+          />
+        </FilterField>
+      </div>
 
       <Divider />
 

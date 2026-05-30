@@ -64,7 +64,7 @@ export default function InternshipSearchPage() {
         <div className="absolute inset-0 bg-black/55" />
 
         <div className="relative mx-auto max-w-7xl">
-          {/* Eyebrow label */}
+          {/* Eyebrow label */}   
           <p
             className="mb-3 inline-block rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-widest text-white/70 backdrop-blur-sm"
             style={{ fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.12em" }}

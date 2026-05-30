@@ -76,6 +76,7 @@ export function normalizeFilters(filters) {
     profile: normalizedText(filters.profile),
     location: normalizedText(filters.location),
     minDuration: toNumberOrNull(filters.minDuration),
+    maxDuration: toNumberOrNull(filters.maxDuration),
     minStipend: toNumberOrNull(filters.minStipend),
     workFromHome: Boolean(filters.workFromHome),
     activeHiring: Boolean(filters.activeHiring),
@@ -98,6 +99,10 @@ export function applyFiltersAndSorting(list, filters, search, sortBy) {
     }
 
     if (safeFilters.minDuration !== null && item.durationMonths < safeFilters.minDuration) {
+      return false;
+    }
+
+    if (safeFilters.maxDuration !== null && item.durationMonths > safeFilters.maxDuration) {
       return false;
     }
 

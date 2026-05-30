@@ -6,6 +6,7 @@ function formatChipValue(key, value) {
   if (value === null || value === "") return "";
   if (key === "minStipend") return `₹${Number(value).toLocaleString()}+`;
   if (key === "minDuration") return `${value} month${Number(value) > 1 ? "s" : ""}+`;
+  if (key === "maxDuration") return `${value} month${Number(value) > 1 ? "s" : ""} max`;
   return value;
 }
 

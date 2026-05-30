@@ -23,13 +23,6 @@ function SkeletonCard() {
         ))}
       </div>
 
-      {/* Skill tags */}
-      <div className="mt-3 flex gap-1.5">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="h-5 w-14 rounded-md bg-gray-100" />
-        ))}
-      </div>
-
       {/* Footer */}
       <div className="mt-4 flex items-center justify-between border-t border-gray-50 pt-3">
         <div className="h-3 w-24 rounded-md bg-gray-100" />
